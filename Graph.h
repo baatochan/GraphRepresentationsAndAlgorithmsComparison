@@ -8,12 +8,42 @@
 
 #include <vector>
 #include <forward_list>
+#include <string>
 
 class Graph {
+public:
+	Graph(std::string name, int numberOfAvailableAlgorithms);
+
 protected:
+	const std::string name;
+
+	const int numberOfAvailableAlgorithms;
+
+protected:
+
 	std::vector<std::vector<int>> incidenceMatrix;
 
-	std::vector<std::forward_list> adjacencyList;
+	std::vector<std::forward_list<int>> adjacencyList;
+
+public:
+	std::string getName();
+
+	int getNumberOfAvailableAlgorithms();
+
+	virtual std::string getAvailableAlgorithms()= 0;
+
+	virtual void loadDataFrom(std::string fileName)= 0;
+
+	virtual void generate(int numberOfVertices, int density)= 0;
+
+	virtual std::string printIncidenceMatrix()= 0;
+
+	virtual std::string printAdjacencyList()= 0;
+
+	virtual void runAlgorithm(int index)= 0;
+
+	virtual void test()= 0;
+
 };
 
 

@@ -15,6 +15,11 @@ private:
 
 public:
 	void start();
+
+private:
+	void printGraphTypeSelect();
+
+	void printGraphMenu();
 };
 
 
