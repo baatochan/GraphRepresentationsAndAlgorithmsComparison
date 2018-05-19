@@ -18,10 +18,6 @@ std::string UndirectedGraph::getAvailableAlgorithms() {
 	return output;
 }
 
-void UndirectedGraph::loadDataFrom(std::string fileName) {
-	vector<int> rawData = loadRawDataFrom(fileName);
-}
-
 void UndirectedGraph::generate(int numberOfVertices, int density) {
 
 }
@@ -31,5 +27,15 @@ void UndirectedGraph::runAlgorithm(int index) {
 }
 
 void UndirectedGraph::test() {
+
+}
+
+// private
+
+void UndirectedGraph::loadRawDataToMatrix(vector<int> rawData) {
+
+}
+
+void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 }

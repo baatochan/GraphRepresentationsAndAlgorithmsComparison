@@ -112,6 +112,12 @@ string Graph::printAdjacencyList() {
 	return output;
 }
 
+void Graph::loadDataFrom(std::string fileName) {
+	vector<int> rawData = loadRawDataFrom(fileName);
+	loadRawDataToMatrix(rawData);
+	loadRawDataToList(rawData);
+}
+
 // protected
 
 vector<int> Graph::loadRawDataFrom(string path) {

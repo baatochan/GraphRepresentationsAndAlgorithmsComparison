@@ -18,10 +18,6 @@ std::string DirectedGraph::getAvailableAlgorithms() {
 	return output;
 }
 
-void DirectedGraph::loadDataFrom(std::string fileName) {
-	vector<int> rawData = loadRawDataFrom(fileName);
-}
-
 void DirectedGraph::generate(int numberOfVertices, int density) {
 
 }
@@ -31,5 +27,15 @@ void DirectedGraph::runAlgorithm(int index) {
 }
 
 void DirectedGraph::test() {
+
+}
+
+// private
+
+void DirectedGraph::loadRawDataToMatrix(std::vector<int> rawData) {
+
+}
+
+void DirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 }
