@@ -6,7 +6,8 @@
 
 // protected
 
-Graph::Graph(const std::string name, int numberOfAvailableAlgorithms) : name(name), numberOfAvailableAlgorithms(numberOfAvailableAlgorithms) {}
+Graph::Graph(const std::string name, int numberOfAvailableAlgorithms)
+		: name(name), numberOfAvailableAlgorithms(numberOfAvailableAlgorithms) {}
 
 // public
 

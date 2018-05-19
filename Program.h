@@ -11,7 +11,7 @@
 
 class Program {
 private:
-	Graph *graph;
+	Graph* graph;
 
 public:
 	void start();

@@ -12,19 +12,19 @@ class DirectedGraph : public Graph {
 public:
 	DirectedGraph();
 
-	std::string getAvailableAlgorithms() override ;
+	std::string getAvailableAlgorithms() override;
 
-	void loadDataFrom(std::string fileName) override ;
+	void loadDataFrom(std::string fileName) override;
 
-	void generate(int numberOfVertices, int density) override ;
+	void generate(int numberOfVertices, int density) override;
 
-	std::string printIncidenceMatrix() override ;
+	std::string printIncidenceMatrix() override;
 
-	std::string printAdjacencyList() override ;
+	std::string printAdjacencyList() override;
 
-	void runAlgorithm(int index) override ;
+	void runAlgorithm(int index) override;
 
-	void test() override ;
+	void test() override;
 
 };
 

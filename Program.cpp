@@ -65,13 +65,13 @@ void Program::start() {
 
 				case '2': // generuj losowo
 					cout << "Podaj ilosc wierzcholkow: ";
-					while(!(cin >> numberOfVerticles)){
+					while (!(cin >> numberOfVerticles)) {
 						cin.clear();
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						cout << "Bledna wartosc! Podaj ilosc wierzcholkow: ";
 					}
 					cout << "Podaj gestosc grafu: ";
-					while(!(cin >> density)){
+					while (!(cin >> density)) {
 						cin.clear();
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						cout << "Bledna wartosc! Podaj gestosc grafu: ";
@@ -83,17 +83,17 @@ void Program::start() {
 				case '3': // wyswietl macierz
 					matrix = graph->printIncidenceMatrix();
 
-					cout<<endl;
-					cout<<matrix;
-					cout<<endl;
+					cout << endl;
+					cout << matrix;
+					cout << endl;
 					break;
 
 				case '4': // wyswietl liste
 					list = graph->printAdjacencyList();
 
-					cout<<endl;
-					cout<<list;
-					cout<<endl;
+					cout << endl;
+					cout << list;
+					cout << endl;
 					break;
 
 				case '5': // algorytm 1
