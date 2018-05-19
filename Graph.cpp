@@ -62,7 +62,7 @@ std::string Graph::printIncidenceMatrix() {
 			temp = std::to_string(incidenceMatrix[i][j]);
 
 			output += " ";
-			for (int j = 0; j < 5 - temp.size(); j++) {
+			for (int k = 0; k < 5 - temp.size(); k++) {
 				if (temp.size() > 5) break;
 				output += " ";
 			}
