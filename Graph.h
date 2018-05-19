@@ -28,7 +28,7 @@ protected:
 
 	std::vector<std::vector<int>> incidenceMatrix;
 
-	std::vector<std::forward_list<int>> adjacencyList;
+	std::vector<std::forward_list<EdgeListElement>> adjacencyList;
 
 public:
 	std::string getName();
