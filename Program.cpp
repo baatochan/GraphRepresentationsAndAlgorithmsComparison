@@ -119,6 +119,8 @@ void Program::start() {
 
 		} while (option2 != '0');
 
+		delete graph;
+
 	} while (option != '0');
 }
 

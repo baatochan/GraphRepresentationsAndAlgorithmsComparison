@@ -23,6 +23,11 @@ std::string Graph::printIncidenceMatrix() {
 	std::string output = getName();
 	std::string temp = "";
 
+	if (incidenceMatrix.size() == 0) {
+		output = "Graf pusty!";
+		return output;
+	}
+
 	output += "\n  K\\W  ||"; //lewy gorny rog ma ' K\W  ||', podwojny | dla wyroznienia komorki
 
 	// wypisz pierwsza linijke
@@ -78,6 +83,11 @@ std::string Graph::printIncidenceMatrix() {
 std::string Graph::printAdjacencyList() {
 	std::string output = getName();
 	std::string temp = "";
+
+	if (adjacencyList.size() == 0) {
+		output = "Graf pusty!";
+		return output;
+	}
 
 	output += "\n   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
 
