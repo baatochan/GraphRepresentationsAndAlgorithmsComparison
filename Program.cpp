@@ -20,6 +20,7 @@ void Program::start() {
 	int density;
 	string matrix;
 	string list;
+	char index;
 
 	do {
 		printGraphTypeSelect();
@@ -96,45 +97,16 @@ void Program::start() {
 					cout << endl;
 					break;
 
-				case '5': // algorytm 1
-					if (graph->getNumberOfAvailableAlgorithms() > 0) {
-						graph->runAlgorithm(1);
-					} else {
-						cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
-					}
+				case '5':
+					graph->test();
 					break;
 
-				case '6': // algorytm 2
-					if (graph->getNumberOfAvailableAlgorithms() > 1) {
-						graph->runAlgorithm(2);
-					} else {
-						cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
-					}
-					break;
-
-				case '7': // algorytm 3
-					if (graph->getNumberOfAvailableAlgorithms() > 2) {
-						graph->runAlgorithm(3);
-					} else {
-						cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
-					}
-					break;
-
-				case '8': // algorytm 4
-					if (graph->getNumberOfAvailableAlgorithms() > 3) {
-						graph->runAlgorithm(4);
-					} else {
-						cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
-					}
-					break;
-
-				case '9': // algorytm 5
-					if (graph->getNumberOfAvailableAlgorithms() > 4) {
-						graph->runAlgorithm(5);
-					} else {
-						cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
-					}
-					break;
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					index = option2 - 53;
+					runAlgorithm(index);
 
 				case '0':
 					break;
@@ -172,10 +144,33 @@ void Program::printGraphMenu() {
 	cout << "2. Generuj losowo" << endl;
 	cout << "3. Wyswietl graf jako macierz" << endl;
 	cout << "4. Wyswietl graf jako lista" << endl;
+	cout << "5. Wykonaj testy" << endl;
 
 	string availableAlgorithms = graph->getAvailableAlgorithms();
 	cout << availableAlgorithms;
 
 	cout << "0. Wyjscie" << endl;
 	cout << "Podaj opcje:";
+}
+
+void Program::runAlgorithm(char index) {
+	int arg1;
+	int arg2;
+	if (graph->getNumberOfAvailableAlgorithms() > index - 1) {
+		cout<<"Podaj argument 1: ";
+		while (!(cin >> arg1)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Bledna wartosc! Podaj argument 1: ";
+		}
+		cout<<"Podaj argument 2: ";
+		while (!(cin >> arg2)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Bledna wartosc! Podaj argument 2: ";
+		}
+		graph->runAlgorithm(index, arg1, arg2);
+	} else {
+		cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
+	}
 }
