@@ -53,5 +53,23 @@ void UndirectedGraph::loadRawDataToMatrix(vector<int> rawData) {
 }
 
 void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
+	adjacencyList.clear();
+	int i = 0;
 
+	int numberOfEdges = rawData[i++];
+
+	adjacencyList.resize(rawData[i++]);
+
+	for (int j = 0; j < numberOfEdges; j++) {
+		int edgeBeginning = rawData[i++];
+		int edgeEnd = rawData[i++];
+		int edgeValue = rawData[i++];
+
+		adjacencyList[edgeBeginning].push_front({edgeEnd, edgeValue});
+
+		if (edgeBeginning == edgeEnd)
+			continue;
+
+		adjacencyList[edgeEnd].push_front({edgeBeginning, edgeValue});
+	}
 }
