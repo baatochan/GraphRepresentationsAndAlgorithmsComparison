@@ -31,13 +31,13 @@ public:
 
 	virtual std::string getAvailableAlgorithms()= 0;
 
+	std::string printIncidenceMatrix();
+
+	std::string printAdjacencyList();
+
 	virtual void loadDataFrom(std::string fileName)= 0;
 
 	virtual void generate(int numberOfVertices, int density)= 0;
-
-	virtual std::string printIncidenceMatrix()= 0;
-
-	virtual std::string printAdjacencyList()= 0;
 
 	virtual void runAlgorithm(int index)= 0;
 
