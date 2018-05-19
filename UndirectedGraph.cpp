@@ -24,14 +24,6 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 
 }
 
-std::string UndirectedGraph::printIncidenceMatrix() {
-	return std::__cxx11::string();
-}
-
-std::string UndirectedGraph::printAdjacencyList() {
-	return std::__cxx11::string();
-}
-
 void UndirectedGraph::runAlgorithm(int index) {
 
 }

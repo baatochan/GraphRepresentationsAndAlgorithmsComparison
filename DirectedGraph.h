@@ -18,10 +18,6 @@ public:
 
 	void generate(int numberOfVertices, int density) override;
 
-	std::string printIncidenceMatrix() override;
-
-	std::string printAdjacencyList() override;
-
 	void runAlgorithm(int index) override;
 
 	void test() override;

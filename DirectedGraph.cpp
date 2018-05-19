@@ -24,14 +24,6 @@ void DirectedGraph::generate(int numberOfVertices, int density) {
 
 }
 
-std::string DirectedGraph::printIncidenceMatrix() {
-	return std::__cxx11::string();
-}
-
-std::string DirectedGraph::printAdjacencyList() {
-	return std::__cxx11::string();
-}
-
 void DirectedGraph::runAlgorithm(int index) {
 
 }
