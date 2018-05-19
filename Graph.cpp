@@ -4,14 +4,16 @@
 
 #include "Graph.h"
 
+using namespace std;
+
 // protected
 
-Graph::Graph(const std::string name, int numberOfAvailableAlgorithms)
+Graph::Graph(const string name, int numberOfAvailableAlgorithms)
 		: name(name), numberOfAvailableAlgorithms(numberOfAvailableAlgorithms) {}
 
 // public
 
-std::string Graph::getName() {
+string Graph::getName() {
 	return name;
 }
 
@@ -19,15 +21,15 @@ int Graph::getNumberOfAvailableAlgorithms() {
 	return numberOfAvailableAlgorithms;
 }
 
-std::string Graph::printIncidenceMatrix() {
-	std::string output = getName();
-	std::string temp = "";
+string Graph::printIncidenceMatrix() {
+	string output = getName();
+	string temp = "";
 
 	output += "\n  K\\W  ||"; //lewy gorny rog ma ' K\W  ||', podwojny | dla wyroznienia komorki
 
 	// wypisz pierwsza linijke
 	for (int i = 0; i < incidenceMatrix[0].size(); i++) {
-		temp = std::to_string(i);
+		temp = to_string(i);
 
 		output += " ";
 		for (int j = 0; j < 5 - temp.size(); j++) { //miejsce na 6 znakow dla kazdej komorki
@@ -48,7 +50,7 @@ std::string Graph::printIncidenceMatrix() {
 	//wypisz kolejne linijki
 	for (int i = 0; i < incidenceMatrix.size(); i++) {
 		// pierwsza pozycja kolejnej linijki
-		temp = std::to_string(i);
+		temp = to_string(i);
 
 		output += " ";
 		for (int j = 0; j < 5 - temp.size(); j++) {
@@ -59,7 +61,7 @@ std::string Graph::printIncidenceMatrix() {
 
 		// kolejne pozycje kolejnych linijek
 		for (int j = 0; j < incidenceMatrix[0].size(); j++) {
-			temp = std::to_string(incidenceMatrix[i][j]);
+			temp = to_string(incidenceMatrix[i][j]);
 
 			output += " ";
 			for (int j = 0; j < 5 - temp.size(); j++) {
@@ -75,9 +77,9 @@ std::string Graph::printIncidenceMatrix() {
 	return output;
 }
 
-std::string Graph::printAdjacencyList() {
-	std::string output = getName();
-	std::string temp = "";
+string Graph::printAdjacencyList() {
+	string output = getName();
+	string temp = "";
 
 	output += "\n   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
 
@@ -89,7 +91,7 @@ std::string Graph::printAdjacencyList() {
 
 	for (int i = 0; i < adjacencyList.size(); i++) {
 		// pierwsza pozycja kolejnej linijki
-		temp = std::to_string(i);
+		temp = to_string(i);
 
 		output += " ";
 		for (int j = 0; j < 5 - temp.size(); j++) {
@@ -100,7 +102,7 @@ std::string Graph::printAdjacencyList() {
 
 		// kolejne pozycje
 		for (auto& element : adjacencyList[i]) {
-			output += " " + std::to_string(element.edgeEnd) + ", " + std::to_string(element.value) + " |";
+			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
 		}
 
 		output += "\n";
