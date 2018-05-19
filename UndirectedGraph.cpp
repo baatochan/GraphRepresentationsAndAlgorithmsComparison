@@ -4,6 +4,8 @@
 
 #include "UndirectedGraph.h"
 
+using namespace std;
+
 // public
 
 UndirectedGraph::UndirectedGraph() : Graph("Graf nieskierowany", 1) {}
@@ -17,7 +19,7 @@ std::string UndirectedGraph::getAvailableAlgorithms() {
 }
 
 void UndirectedGraph::loadDataFrom(std::string fileName) {
-
+	vector<int> rawData = loadRawDataFrom(fileName);
 }
 
 void UndirectedGraph::generate(int numberOfVertices, int density) {

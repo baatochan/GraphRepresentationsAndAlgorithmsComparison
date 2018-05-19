@@ -60,7 +60,11 @@ void Program::start() {
 					cout << "Podaj nazwe pliku: ";
 					cin >> file;
 
-					graph->loadDataFrom(file);
+					try {
+						graph->loadDataFrom(file);
+					} catch (const char* e) {
+						cout<<e<<endl;
+					}
 					break;
 
 				case '2': // generuj losowo

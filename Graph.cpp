@@ -2,6 +2,7 @@
 // Created by barto on 19.05.18.
 //
 
+#include <fstream>
 #include "Graph.h"
 
 using namespace std;
@@ -109,4 +110,28 @@ string Graph::printAdjacencyList() {
 	}
 
 	return output;
+}
+
+// protected
+
+vector<int> Graph::loadRawDataFrom(string path) {
+	vector<int> returnIntVector = vector<int>();
+	vector<string> values = vector<string>();
+
+	fstream file(path, ios::in);
+
+	if (!file.is_open())
+		return returnIntVector; // should throw an error
+
+	string temp = "";
+	while (file >> temp) {
+		try {
+			returnIntVector.push_back(stoi(temp));
+		} catch (const exception& e) {
+			returnIntVector.clear();
+			throw "Bledna zawartosc pliku! Upewnij sie ze podales odpowiedni format!";
+		}
+	}
+
+	return returnIntVector;
 }

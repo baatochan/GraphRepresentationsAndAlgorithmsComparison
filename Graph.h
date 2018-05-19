@@ -49,6 +49,10 @@ public:
 
 	virtual void test()= 0;
 
+protected:
+
+	std::vector<int> loadRawDataFrom(std::string path);
+
 };
 
 

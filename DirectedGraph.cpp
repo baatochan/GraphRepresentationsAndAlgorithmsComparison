@@ -4,6 +4,8 @@
 
 #include "DirectedGraph.h"
 
+using namespace std;
+
 // public
 
 DirectedGraph::DirectedGraph() : Graph("Graf skierowany", 1) {}
@@ -17,7 +19,7 @@ std::string DirectedGraph::getAvailableAlgorithms() {
 }
 
 void DirectedGraph::loadDataFrom(std::string fileName) {
-
+	vector<int> rawData = loadRawDataFrom(fileName);
 }
 
 void DirectedGraph::generate(int numberOfVertices, int density) {
