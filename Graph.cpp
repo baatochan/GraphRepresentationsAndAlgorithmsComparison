@@ -76,5 +76,35 @@ std::string Graph::printIncidenceMatrix() {
 }
 
 std::string Graph::printAdjacencyList() {
+	std::string output = getName();
+	std::string temp = "";
 
+	output += "\n   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
+
+	// druga linijka rozdzielajaca
+	for (int i = 0; i < 80; i++) {
+		output += "-";
+	}
+	output += "\n";
+
+	for (int i = 0; i < adjacencyList.size(); i++) {
+		// pierwsza pozycja kolejnej linijki
+		temp = std::to_string(i);
+
+		output += " ";
+		for (int j = 0; j < 5 - temp.size(); j++) {
+			if (temp.size() > 5) break;
+			output += " ";
+		}
+		output += temp + " ||";
+
+		// kolejne pozycje
+		for (auto& element : adjacencyList[i]) {
+			output += " " + std::to_string(element.edgeEnd) + ", " + std::to_string(element.value) + " |";
+		}
+
+		output += "\n";
+	}
+
+	return output;
 }

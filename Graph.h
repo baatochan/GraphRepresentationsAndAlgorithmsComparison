@@ -14,6 +14,12 @@ class Graph {
 protected:
 	Graph(std::string name, int numberOfAvailableAlgorithms);
 
+	// implementing it here as it is needed for adjacencyList declaration
+	struct EdgeListElement {
+		int edgeEnd;
+		int value;
+	};
+
 	const std::string name;
 
 	const int numberOfAvailableAlgorithms;
