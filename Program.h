@@ -20,6 +20,8 @@ private:
 	void printGraphTypeSelect();
 
 	void printGraphMenu();
+
+	void runAlgorithm(char index);
 };
 
 
