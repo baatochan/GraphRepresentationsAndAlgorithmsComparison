@@ -2,16 +2,19 @@
 // Created by barto on 19.05.18.
 //
 
+#include <fstream>
 #include "Graph.h"
+
+using namespace std;
 
 // protected
 
-Graph::Graph(const std::string name, int numberOfAvailableAlgorithms)
+Graph::Graph(const string name, int numberOfAvailableAlgorithms)
 		: name(name), numberOfAvailableAlgorithms(numberOfAvailableAlgorithms) {}
 
 // public
 
-std::string Graph::getName() {
+string Graph::getName() {
 	return name;
 }
 
@@ -19,9 +22,9 @@ int Graph::getNumberOfAvailableAlgorithms() {
 	return numberOfAvailableAlgorithms;
 }
 
-std::string Graph::printIncidenceMatrix() {
-	std::string output = getName();
-	std::string temp = "";
+string Graph::printIncidenceMatrix() {
+	string output = getName();
+	string temp = "";
 
 	if (incidenceMatrix.size() == 0) {
 		output = "Graf pusty!";
@@ -32,7 +35,7 @@ std::string Graph::printIncidenceMatrix() {
 
 	// wypisz pierwsza linijke
 	for (int i = 0; i < incidenceMatrix[0].size(); i++) {
-		temp = std::to_string(i);
+		temp = to_string(i);
 
 		output += " ";
 		for (int j = 0; j < 5 - temp.size(); j++) { //miejsce na 6 znakow dla kazdej komorki
@@ -53,7 +56,7 @@ std::string Graph::printIncidenceMatrix() {
 	//wypisz kolejne linijki
 	for (int i = 0; i < incidenceMatrix.size(); i++) {
 		// pierwsza pozycja kolejnej linijki
-		temp = std::to_string(i);
+		temp = to_string(i);
 
 		output += " ";
 		for (int j = 0; j < 5 - temp.size(); j++) {
@@ -64,7 +67,7 @@ std::string Graph::printIncidenceMatrix() {
 
 		// kolejne pozycje kolejnych linijek
 		for (int j = 0; j < incidenceMatrix[0].size(); j++) {
-			temp = std::to_string(incidenceMatrix[i][j]);
+			temp = to_string(incidenceMatrix[i][j]);
 
 			output += " ";
 			for (int k = 0; k < 5 - temp.size(); k++) {
@@ -80,9 +83,9 @@ std::string Graph::printIncidenceMatrix() {
 	return output;
 }
 
-std::string Graph::printAdjacencyList() {
-	std::string output = getName();
-	std::string temp = "";
+string Graph::printAdjacencyList() {
+	string output = getName();
+	string temp = "";
 
 	if (adjacencyList.size() == 0) {
 		output = "Graf pusty!";
@@ -99,7 +102,7 @@ std::string Graph::printAdjacencyList() {
 
 	for (int i = 0; i < adjacencyList.size(); i++) {
 		// pierwsza pozycja kolejnej linijki
-		temp = std::to_string(i);
+		temp = to_string(i);
 
 		output += " ";
 		for (int j = 0; j < 5 - temp.size(); j++) {
@@ -110,11 +113,41 @@ std::string Graph::printAdjacencyList() {
 
 		// kolejne pozycje
 		for (auto& element : adjacencyList[i]) {
-			output += " " + std::to_string(element.edgeEnd) + ", " + std::to_string(element.value) + " |";
+			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
 		}
 
 		output += "\n";
 	}
 
 	return output;
+}
+
+void Graph::loadDataFrom(std::string fileName) {
+	vector<int> rawData = loadRawDataFrom(fileName);
+	loadRawDataToMatrix(rawData);
+	loadRawDataToList(rawData);
+}
+
+// protected
+
+vector<int> Graph::loadRawDataFrom(string path) {
+	vector<int> returnIntVector = vector<int>();
+	vector<string> values = vector<string>();
+
+	fstream file(path, ios::in);
+
+	if (!file.is_open())
+		return returnIntVector; // should throw an error
+
+	string temp = "";
+	while (file >> temp) {
+		try {
+			returnIntVector.push_back(stoi(temp));
+		} catch (const exception& e) {
+			returnIntVector.clear();
+			throw "Bledna zawartosc pliku! Upewnij sie ze podales odpowiedni format!";
+		}
+	}
+
+	return returnIntVector;
 }

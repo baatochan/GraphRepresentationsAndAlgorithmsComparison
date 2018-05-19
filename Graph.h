@@ -41,13 +41,20 @@ public:
 
 	std::string printAdjacencyList();
 
-	virtual void loadDataFrom(std::string fileName)= 0;
+	void loadDataFrom(std::string fileName);
 
 	virtual void generate(int numberOfVertices, int density)= 0;
 
 	virtual void runAlgorithm(int index, int arg1, int arg2)= 0;
 
 	virtual void test()= 0;
+
+protected:
+
+	std::vector<int> loadRawDataFrom(std::string path);
+
+	virtual void loadRawDataToMatrix(std::vector<int> rawData)= 0;
+	virtual void loadRawDataToList(std::vector<int> rawData)= 0;
 
 };
 

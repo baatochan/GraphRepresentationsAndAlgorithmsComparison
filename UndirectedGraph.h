@@ -14,13 +14,15 @@ public:
 
 	std::string getAvailableAlgorithms() override;
 
-	void loadDataFrom(std::string fileName) override;
-
 	void generate(int numberOfVertices, int density) override;
 
 	void runAlgorithm(int index, int arg1, int arg2) override;
 
 	void test() override;
+
+protected:
+	void loadRawDataToMatrix(std::vector<int> rawData) override ;
+	void loadRawDataToList(std::vector<int> rawData) override ;
 
 };
 
