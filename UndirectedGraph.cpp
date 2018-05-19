@@ -33,7 +33,23 @@ void UndirectedGraph::test() {
 // private
 
 void UndirectedGraph::loadRawDataToMatrix(vector<int> rawData) {
+	incidenceMatrix.clear();
+	int i = 0;
+	incidenceMatrix.resize(rawData[i++]); // clear vector and resize to first item of raw data
 
+	for (auto& row : incidenceMatrix) {
+		row.assign(rawData[i], 0);
+	}
+	i++;
+
+	for (int j = 0; j < incidenceMatrix.size(); j++) {
+		int edgeBeginning = rawData[i++];
+		int edgeEnd = rawData[i++];
+		int edgeValue = rawData[i++];
+
+		incidenceMatrix[j][edgeEnd] = edgeValue;
+		incidenceMatrix[j][edgeBeginning] = edgeValue;
+	}
 }
 
 void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
