@@ -11,10 +11,9 @@
 #include <string>
 
 class Graph {
-public:
+protected:
 	Graph(std::string name, int numberOfAvailableAlgorithms);
 
-protected:
 	const std::string name;
 
 	const int numberOfAvailableAlgorithms;
