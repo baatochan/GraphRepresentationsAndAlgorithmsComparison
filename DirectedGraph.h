@@ -9,6 +9,22 @@
 #include "Graph.h"
 
 class DirectedGraph : public Graph {
+public:
+	DirectedGraph();
+
+	std::string getAvailableAlgorithms() override;
+
+	void loadDataFrom(std::string fileName) override;
+
+	void generate(int numberOfVertices, int density) override;
+
+	std::string printIncidenceMatrix() override;
+
+	std::string printAdjacencyList() override;
+
+	void runAlgorithm(int index) override;
+
+	void test() override;
 
 };
 

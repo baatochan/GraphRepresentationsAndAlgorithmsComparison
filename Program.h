@@ -11,10 +11,15 @@
 
 class Program {
 private:
-	Graph *graph;
+	Graph* graph;
 
 public:
 	void start();
+
+private:
+	void printGraphTypeSelect();
+
+	void printGraphMenu();
 };
 
 
