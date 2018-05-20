@@ -75,17 +75,21 @@ void DirectedGraph::generate(int numberOfVertices, int density, int range) {
 }
 
 string DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+	string output;
+
 	if (index == 1) {
 		if (arg1 == 0) {
-			dijkstrasAlgorithmOnMatrix();
+			output = dijkstrasAlgorithmOnMatrix();
 		} else if (arg1 == 1) {
-			dijkstrasAlgorithmOnList();
+			output = dijkstrasAlgorithmOnList();
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
 	} else {
 		throw "Algorytm nie istnieje!";
 	}
+
+	return output;
 }
 
 void DirectedGraph::test() {
@@ -143,10 +147,10 @@ void DirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-void DirectedGraph::dijkstrasAlgorithmOnMatrix() {
+string DirectedGraph::dijkstrasAlgorithmOnMatrix() {
 	throw "Algorytm jeszcze nie zaimplementowany!";
 }
 
-void DirectedGraph::dijkstrasAlgorithmOnList() {
+string DirectedGraph::dijkstrasAlgorithmOnList() {
 	throw "Algorytm jeszcze nie zaimplementowany!";
 }
