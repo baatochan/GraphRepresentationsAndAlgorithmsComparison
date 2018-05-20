@@ -23,6 +23,11 @@ public:
 protected:
 	void loadRawDataToMatrix(std::vector<int> rawData) override ;
 	void loadRawDataToList(std::vector<int> rawData) override ;
+
+private:
+	void dijkstrasAlgorithmOnMatrix();
+	void dijkstrasAlgorithmOnList();
+
 };
 
 

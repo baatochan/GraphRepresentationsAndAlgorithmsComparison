@@ -24,6 +24,10 @@ protected:
 	void loadRawDataToMatrix(std::vector<int> rawData) override ;
 	void loadRawDataToList(std::vector<int> rawData) override ;
 
+private:
+	void primsAlgorithmOnMatrix();
+	void primsAlgorithmOnList();
+
 };
 
 
