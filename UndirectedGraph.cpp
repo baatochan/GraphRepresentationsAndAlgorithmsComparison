@@ -3,7 +3,10 @@
 //
 
 #include <random>
+#include <queue>
+#include <algorithm>
 #include "UndirectedGraph.h"
+#include "MinHeapElement.h"
 
 using namespace std;
 
@@ -145,7 +148,69 @@ void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 // private
 
 void UndirectedGraph::primsAlgorithmOnMatrix() {
-	throw "Algorytm jeszcze nie zaimplementowany!";
+	// prepare vector for output
+	vector<vector<int>> minimumSpanningTree;
+	int numberOfVertices = incidenceMatrix[0].size();
+	vector<int> foundVertices;
+	priority_queue<MinHeapElement, vector<MinHeapElement>, MinHeapElementComparator> queue;
+
+	// take first vertex
+	int vertexID = 0;
+	int edgeEnd;
+	int edgeValue;
+	int i;
+	int j;
+
+	foundVertices.push_back(vertexID);
+
+	do {
+		// look for edges from first vertices
+		for (auto &row : incidenceMatrix) {
+			if (row[vertexID] > 0) {
+				edgeValue = row[vertexID];
+				i = 0;
+				edgeEnd = -1;
+				for (auto &v : row) {
+					if (i == vertexID) {
+						i++;
+						continue;
+					}
+					if (v > 0) {
+						edgeEnd = i;
+					}
+					i++;
+				}
+
+				if (edgeEnd == -1)
+					throw "Nieznany blad!"; // should never be thrown
+
+				queue.push(MinHeapElement(vertexID, edgeEnd, edgeValue));
+
+			}
+		}
+
+		do {
+			MinHeapElement element = queue.top();
+			edgeEnd = element.getEdgeEnd();
+			edgeValue = element.getEdgeValue();
+		} while (find(foundVertices.begin(), foundVertices.end(), edgeEnd) != foundVertices.end());
+
+		foundVertices.push_back(edgeEnd);
+
+		minimumSpanningTree.emplace_back();
+		minimumSpanningTree[j].resize(numberOfVertices);
+
+		minimumSpanningTree[j][vertexID] = edgeValue;
+		minimumSpanningTree[j][edgeEnd] = edgeValue;
+
+		vertexID = edgeEnd;
+		j++;
+
+	} while (foundVertices.size() < numberOfVertices && queue.size() > 0);
+
+	if (foundVertices.size() < numberOfVertices)
+		throw "Graf niespojny!";
+
 }
 
 void UndirectedGraph::primsAlgorithmOnList() {
