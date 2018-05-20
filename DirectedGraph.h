@@ -16,7 +16,7 @@ public:
 
 	void generate(int numberOfVertices, int density) override;
 
-	void runAlgorithm(int index, int arg1, int arg2) override;
+	void runAlgorithm(char index, char arg1, int arg2, int arg3) override;
 
 	void test() override;
 

@@ -110,7 +110,11 @@ void Program::start() {
 				case '8':
 				case '9':
 					index = option2 - 53;
-					runAlgorithm(index);
+					try {
+						runAlgorithm(index);
+					} catch (const char* e) {
+						cerr << e << endl;
+					}
 
 				case '0':
 					break;
@@ -136,7 +140,7 @@ void Program::printGraphTypeSelect() {
 	cout << "1. Graf nieskierowany" << endl;
 	cout << "2. Graf skierowany" << endl;
 	cout << "0. Wyjscie" << endl;
-	cout << "Podaj opcje:";
+	cout << "Podaj opcje: ";
 }
 
 void Program::printGraphMenu() {
@@ -156,26 +160,45 @@ void Program::printGraphMenu() {
 	cout << availableAlgorithms;
 
 	cout << "0. Wyjscie" << endl;
-	cout << "Podaj opcje:";
+	cout << "Podaj opcje: ";
 }
 
 void Program::runAlgorithm(char index) {
-	int arg1;
+	string arg1s;
+	char arg1;
 	int arg2;
+	int arg3;
+	
 	if (graph->getNumberOfAvailableAlgorithms() > index - 1) {
 		cout << "Podaj argument 1: ";
-		while (!(cin >> arg1)) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cin >> arg1s;
+		while (arg1s != "l" || arg1s != "L" || arg1s != "m" || arg1s != "M") {
 			cerr << "Bledna wartosc! Podaj argument 1: ";
+			cin >> arg1s;
 		}
+
+		if (arg1s == "m" || arg1s == "M")
+			arg1 = 0; // reprezentacja macierzowa
+		else if (arg1s == "l" || arg1s == "L")
+			arg1 = 1; // reprezentacja listowa
+		else
+			throw "Nieznany blad!"; // should never be thrown
+
 		cout << "Podaj argument 2: ";
 		while (!(cin >> arg2)) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cerr << "Bledna wartosc! Podaj argument 2: ";
 		}
-		graph->runAlgorithm(index, arg1, arg2);
+
+		cout << "Podaj argument 3: ";
+		while (!(cin >> arg3)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cerr << "Bledna wartosc! Podaj argument 3: ";
+		}
+
+		graph->runAlgorithm(index, arg1, arg2, 0);
 	} else {
 		cerr << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
 	}

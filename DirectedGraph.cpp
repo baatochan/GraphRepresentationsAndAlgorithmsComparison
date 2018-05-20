@@ -15,7 +15,7 @@ DirectedGraph::DirectedGraph() : Graph("Graf skierowany", 1) {}
 std::string DirectedGraph::getAvailableAlgorithms() {
 	std::string output = "";
 
-	output += "6. Algorytm Dijkstry (SP) [arg1 <- wierzch. pocz.; arg2 <- wierzch. konc.]\n";
+	output += "6. Algorytm Dijkstry (SP) [arg1 <- rodzaj reprezentacji (m - macierz, l - lista); arg2 <- wierzch. pocz.; arg3 <- wierzch. konc.]\n";
 
 	return output;
 }
@@ -74,7 +74,7 @@ void DirectedGraph::generate(int numberOfVertices, int density) {
 
 }
 
-void DirectedGraph::runAlgorithm(int index, int arg1, int arg2) {
+void DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
 
 }
 
