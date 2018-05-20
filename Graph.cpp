@@ -151,3 +151,25 @@ vector<int> Graph::loadRawDataFrom(string path) {
 
 	return returnIntVector;
 }
+
+bool Graph::edgeBeginningAvailable(int vertex) {
+	int i = 0;
+	for (auto& v : adjacencyList[vertex]) {
+		i++;
+	}
+
+	if (i < (adjacencyList.size() - 1)) return true;
+	return false;
+}
+
+bool Graph::edgeEndAvailable(int beginning, int end) {
+	if (beginning == end) {
+		return false;
+	}
+
+	for (auto& v : adjacencyList[beginning]) {
+		if (v.edgeEnd == end)
+			return false;
+	}
+	return true;
+}

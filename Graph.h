@@ -56,6 +56,9 @@ protected:
 	virtual void loadRawDataToMatrix(std::vector<int> rawData)= 0;
 	virtual void loadRawDataToList(std::vector<int> rawData)= 0;
 
+	bool edgeBeginningAvailable(int vertex);
+	bool edgeEndAvailable(int beginning, int end);
+
 };
 
 
