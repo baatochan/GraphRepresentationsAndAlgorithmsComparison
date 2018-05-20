@@ -41,8 +41,8 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 	std::mt19937 mt(rd());
 	std::uniform_int_distribution<int> randomVertex(0, numberOfVertices - 1);
 	// std::uniform_int_distribution<int> randomEdge(0, numberOfEdges - 1);
-	// std::uniform_int_distribution<int> randomValue(0, 15);
-	std::uniform_int_distribution<int> randomValue(0, INT32_MAX);
+	// std::uniform_int_distribution<int> randomValue(1, 15);
+	std::uniform_int_distribution<int> randomValue(1, INT32_MAX);
 
 	int beginningVertex = 0;
 	int endVertex = 0;
