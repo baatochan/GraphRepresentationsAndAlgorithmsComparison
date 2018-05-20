@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <random>
+#include <climits>
 #include "DirectedGraph.h"
 
 using namespace std;
@@ -75,17 +76,21 @@ void DirectedGraph::generate(int numberOfVertices, int density, int range) {
 }
 
 string DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+	string output;
+
 	if (index == 1) {
 		if (arg1 == 0) {
-			dijkstrasAlgorithmOnMatrix();
+			output = dijkstrasAlgorithmOnMatrix(arg2, arg3);
 		} else if (arg1 == 1) {
-			dijkstrasAlgorithmOnList();
+			output = dijkstrasAlgorithmOnList(arg2, arg3);
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
 	} else {
 		throw "Algorytm nie istnieje!";
 	}
+
+	return output;
 }
 
 void DirectedGraph::test() {
@@ -143,10 +148,152 @@ void DirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-void DirectedGraph::dijkstrasAlgorithmOnMatrix() {
-	throw "Algorytm jeszcze nie zaimplementowany!";
+std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVertex) {
+	if (incidenceMatrix.size() == 0)
+		throw "Graf pusty!";
+
+	int numberOfVertices = incidenceMatrix[0].size();
+
+
+	if (beginVertex >= numberOfVertices || endVertex >= numberOfVertices)
+		throw "Poczatkowy lub koncowy wierzcholek nie istnieje!";
+
+	// create needed arrays and assign default values
+	vector<bool> visitedVertices;
+	vector<unsigned long> pathLength;
+	vector<int> previousVertex;
+	visitedVertices.assign(numberOfVertices, false);
+	pathLength.assign(numberOfVertices, ULONG_MAX);
+	previousVertex.assign(numberOfVertices, -1);
+
+	// assaing starting value
+	pathLength[beginVertex] = 0;
+	int currentVertex = beginVertex;
+	unsigned long shortestPath;
+	int shortestPathVertex;
+
+	// run main loop for numberOfVertices times (every vertex will be visisted)
+	for (int i = 0; i < numberOfVertices; i++) {
+		unsigned long currentLength = pathLength[currentVertex];
+
+		for (auto& row : incidenceMatrix) {
+			if (row[currentVertex] > 0) {
+				for (int j = 0; j < numberOfVertices; j++) {
+					if (row[j] < 0) {
+						if (pathLength[j] > currentLength + row[currentVertex]) {
+							pathLength[j] = currentLength + row[currentVertex];
+							previousVertex[j] = currentVertex;
+						}
+					}
+				}
+			}
+		}
+
+		visitedVertices[currentVertex] = true;
+
+		shortestPath = ULONG_MAX;
+		shortestPathVertex = -1;
+
+		for (int j = 0; j < numberOfVertices; j++) {
+			if (!visitedVertices[j]) {
+				if (pathLength[j] < shortestPath) {
+					shortestPath = pathLength[j];
+					shortestPathVertex = j;
+				}
+			}
+		}
+
+		if ((i != numberOfVertices - 1) && (shortestPathVertex == -1))
+			throw "Graf niespojny!";
+
+		currentVertex = shortestPathVertex;
+
+	}
+
+	string output;
+	output = "Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) + " wynosi: " + to_string(pathLength[endVertex]) + ".\n";
+	output += "Prowadzi nastepujaca droga: ";
+
+	currentVertex = endVertex;
+
+	output += to_string(currentVertex);
+
+	while (currentVertex != beginVertex) {
+		currentVertex = previousVertex[currentVertex];
+		output +=  " <- " + to_string(currentVertex);
+	}
+
+	return output;
 }
 
-void DirectedGraph::dijkstrasAlgorithmOnList() {
-	throw "Algorytm jeszcze nie zaimplementowany!";
+std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVertex) {
+	if (adjacencyList.size() == 0)
+		throw "Graf pusty!";
+
+	int numberOfVertices = adjacencyList.size();
+
+
+	if (beginVertex >= numberOfVertices || endVertex >= numberOfVertices)
+		throw "Poczatkowy lub koncowy wierzcholek nie istnieje!";
+
+	// create needed arrays and assign default values
+	vector<bool> visitedVertices;
+	vector<unsigned long> pathLength;
+	vector<int> previousVertex;
+	visitedVertices.assign(numberOfVertices, false);
+	pathLength.assign(numberOfVertices, ULONG_MAX);
+	previousVertex.assign(numberOfVertices, -1);
+
+	// assaing starting value
+	pathLength[beginVertex] = 0;
+	int currentVertex = beginVertex;
+	unsigned long shortestPath;
+	int shortestPathVertex;
+
+	// run main loop for numberOfVertices times (every vertex will be visisted)
+	for (int i = 0; i < numberOfVertices; i++) {
+		unsigned long currentLength = pathLength[currentVertex];
+
+		for (auto& edge : adjacencyList[currentVertex]) {
+			if (pathLength[edge.edgeEnd] > currentLength + edge.value){
+				pathLength[edge.edgeEnd] = currentLength + edge.value;
+				previousVertex[edge.edgeEnd] = currentVertex;
+			}
+		}
+
+		visitedVertices[currentVertex] = true;
+
+		shortestPath = ULONG_MAX;
+		shortestPathVertex = -1;
+
+		for (int j = 0; j < numberOfVertices; j++) {
+			if (!visitedVertices[j]) {
+				if (pathLength[j] < shortestPath) {
+					shortestPath = pathLength[j];
+					shortestPathVertex = j;
+				}
+			}
+		}
+
+		if ((i != numberOfVertices - 1) && (shortestPathVertex == -1))
+			throw "Graf niespojny!";
+
+		currentVertex = shortestPathVertex;
+
+	}
+
+	string output;
+	output = "Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) + " wynosi: " + to_string(pathLength[endVertex]) + ".\n";
+	output += "Prowadzi nastepujaca droga: ";
+
+	currentVertex = endVertex;
+
+	output += to_string(currentVertex);
+
+	while (currentVertex != beginVertex) {
+		currentVertex = previousVertex[currentVertex];
+		output +=  " <- " + to_string(currentVertex);
+	}
+
+	return output;
 }

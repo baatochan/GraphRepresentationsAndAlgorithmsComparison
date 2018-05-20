@@ -25,8 +25,8 @@ protected:
 	void loadRawDataToList(std::vector<int> rawData) override ;
 
 private:
-	void dijkstrasAlgorithmOnMatrix();
-	void dijkstrasAlgorithmOnList();
+	std::string dijkstrasAlgorithmOnMatrix(int beginVertex, int endVertex);
+	std::string dijkstrasAlgorithmOnList(int beginVertex, int endVertex);
 
 };
 
