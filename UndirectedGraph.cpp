@@ -266,6 +266,7 @@ string UndirectedGraph::primsAlgorithmOnList() {
 		foundVertices.push_back(edgeEnd);
 
 		minimumSpanningTree[vertexID].push_front({edgeEnd, edgeValue});
+		minimumSpanningTree[edgeEnd].push_front({vertexID, edgeValue});
 
 		vertexID = edgeEnd;
 		j++;
