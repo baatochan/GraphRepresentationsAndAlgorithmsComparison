@@ -154,6 +154,10 @@ void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 string UndirectedGraph::primsAlgorithmOnMatrix() {
 	// prepare vector for output
 	vector<vector<int>> minimumSpanningTree;
+
+	if (incidenceMatrix.size() == 0)
+		throw "Graf pusty!";
+
 	int numberOfVertices = incidenceMatrix[0].size();
 	vector<int> foundVertices;
 	priority_queue<MinHeapElement, vector<MinHeapElement>, MinHeapElementComparator> queue;
@@ -163,7 +167,7 @@ string UndirectedGraph::primsAlgorithmOnMatrix() {
 	int edgeEnd;
 	int edgeValue;
 	int i;
-	int j;
+	int j = 0;
 
 	foundVertices.push_back(vertexID);
 
@@ -189,14 +193,17 @@ string UndirectedGraph::primsAlgorithmOnMatrix() {
 					throw "Nieznany blad!"; // should never be thrown
 
 				queue.push(MinHeapElement(vertexID, edgeEnd, edgeValue));
-
 			}
 		}
 
 		do {
+			if (queue.empty()) // jesli kolejka pusta, wywal sie
+				throw "Graf niespojny!";
 			MinHeapElement element = queue.top();
+			vertexID = element.getEdgeBeginning();
 			edgeEnd = element.getEdgeEnd();
 			edgeValue = element.getEdgeValue();
+			queue.pop();
 		} while (find(foundVertices.begin(), foundVertices.end(), edgeEnd) != foundVertices.end());
 
 		foundVertices.push_back(edgeEnd);
@@ -210,10 +217,7 @@ string UndirectedGraph::primsAlgorithmOnMatrix() {
 		vertexID = edgeEnd;
 		j++;
 
-	} while (foundVertices.size() < numberOfVertices && queue.size() > 0);
-
-	if (foundVertices.size() < numberOfVertices)
-		throw "Graf niespojny!";
+	} while (foundVertices.size() < numberOfVertices);
 
 	string output = "Minimalne drzewo rozpinajace\n";
 
