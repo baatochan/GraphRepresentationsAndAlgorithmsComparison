@@ -79,9 +79,9 @@ string DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
 
 	if (index == 1) {
 		if (arg1 == 0) {
-			output = dijkstrasAlgorithmOnMatrix();
+			output = dijkstrasAlgorithmOnMatrix(arg2, arg3);
 		} else if (arg1 == 1) {
-			output = dijkstrasAlgorithmOnList();
+			output = dijkstrasAlgorithmOnList(arg2, arg3);
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
@@ -147,10 +147,10 @@ void DirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-string DirectedGraph::dijkstrasAlgorithmOnMatrix() {
+std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVertex) {
 	throw "Algorytm jeszcze nie zaimplementowany!";
 }
 
-string DirectedGraph::dijkstrasAlgorithmOnList() {
+std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVertex) {
 	throw "Algorytm jeszcze nie zaimplementowany!";
 }
