@@ -59,6 +59,8 @@ protected:
 	bool edgeBeginningAvailable(int vertex);
 	bool edgeEndAvailable(int beginning, int end);
 
+	std::string printMatrix(std::vector<std::vector<int>> v);
+
 };
 
 
