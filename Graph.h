@@ -45,7 +45,7 @@ public:
 
 	virtual void generate(int numberOfVertices, int density)= 0;
 
-	virtual void runAlgorithm(char index, char arg1, int arg2, int arg3)= 0;
+	virtual std::string runAlgorithm(char index, char arg1, int arg2, int arg3)= 0;
 
 	virtual void test()= 0;
 
@@ -58,6 +58,9 @@ protected:
 
 	bool edgeBeginningAvailable(int vertex);
 	bool edgeEndAvailable(int beginning, int end);
+
+	std::string printMatrix(std::vector<std::vector<int>> v);
+	std::string printList(std::vector<std::forward_list<EdgeListElement>> v);
 
 };
 

@@ -24,100 +24,18 @@ int Graph::getNumberOfAvailableAlgorithms() {
 
 string Graph::printIncidenceMatrix() {
 	string output = getName();
-	string temp = "";
-
-	if (incidenceMatrix.size() == 0) {
-		output = "Graf pusty!";
-		return output;
-	}
-
-	output += "\n  K\\W  ||"; //lewy gorny rog ma ' K\W  ||', podwojny | dla wyroznienia komorki
-
-	// wypisz pierwsza linijke
-	for (int i = 0; i < incidenceMatrix[0].size(); i++) {
-		temp = to_string(i);
-
-		output += " ";
-		for (int j = 0; j < 5 - temp.size(); j++) { //miejsce na 6 znakow dla kazdej komorki
-			if (temp.size() > 5) break;
-			output += " ";
-		}
-		output += temp + " |";
-	}
 	output += "\n";
 
-	// pozioma linia dla odzielenia wierszy
-	int firstLineSize = output.size() - getName().size() - 2; //-2 bo dwa razy \n
-	for (int i = 0; i < firstLineSize; i++) {
-		output += "-";
-	}
-	output += "\n";
-
-	//wypisz kolejne linijki
-	for (int i = 0; i < incidenceMatrix.size(); i++) {
-		// pierwsza pozycja kolejnej linijki
-		temp = to_string(i);
-
-		output += " ";
-		for (int j = 0; j < 5 - temp.size(); j++) {
-			if (temp.size() > 5) break;
-			output += " ";
-		}
-		output += temp + " ||";
-
-		// kolejne pozycje kolejnych linijek
-		for (int j = 0; j < incidenceMatrix[0].size(); j++) {
-			temp = to_string(incidenceMatrix[i][j]);
-
-			output += " ";
-			for (int k = 0; k < 5 - temp.size(); k++) {
-				if (temp.size() > 5) break;
-				output += " ";
-			}
-			output += temp + " |";
-		}
-
-		output += "\n";
-	}
+	output += printMatrix(incidenceMatrix);
 
 	return output;
 }
 
 string Graph::printAdjacencyList() {
 	string output = getName();
-	string temp = "";
-
-	if (adjacencyList.size() == 0) {
-		output = "Graf pusty!";
-		return output;
-	}
-
-	output += "\n   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
-
-	// druga linijka rozdzielajaca
-	for (int i = 0; i < 80; i++) {
-		output += "-";
-	}
 	output += "\n";
 
-	for (int i = 0; i < adjacencyList.size(); i++) {
-		// pierwsza pozycja kolejnej linijki
-		temp = to_string(i);
-
-		output += " ";
-		for (int j = 0; j < 5 - temp.size(); j++) {
-			if (temp.size() > 5) break;
-			output += " ";
-		}
-		output += temp + " ||";
-
-		// kolejne pozycje
-		for (auto& element : adjacencyList[i]) {
-			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
-		}
-
-		output += "\n";
-	}
+	output += printList(adjacencyList);
 
 	return output;
 }
@@ -172,4 +90,104 @@ bool Graph::edgeEndAvailable(int beginning, int end) {
 			return false;
 	}
 	return true;
+}
+
+std::string Graph::printMatrix(vector<vector<int>> v) {
+	string output = "";
+	string temp = "";
+
+	if (v.size() == 0) {
+		output = "Graf pusty!";
+		return output;
+	}
+
+	output += "  K\\W  ||"; //lewy gorny rog ma ' K\W  ||', podwojny | dla wyroznienia komorki
+
+	// wypisz pierwsza linijke
+	for (int i = 0; i < v[0].size(); i++) {
+		temp = to_string(i);
+
+		output += " ";
+		for (int j = 0; j < 5 - temp.size(); j++) { //miejsce na 6 znakow dla kazdej komorki
+			if (temp.size() > 5) break;
+			output += " ";
+		}
+		output += temp + " |";
+	}
+	output += "\n";
+
+	// pozioma linia dla odzielenia wierszy
+	int firstLineSize = output.size() - 1; //-1 bo \n
+	for (int i = 0; i < firstLineSize; i++) {
+		output += "-";
+	}
+	output += "\n";
+
+	//wypisz kolejne linijki
+	for (int i = 0; i < v.size(); i++) {
+		// pierwsza pozycja kolejnej linijki
+		temp = to_string(i);
+
+		output += " ";
+		for (int j = 0; j < 5 - temp.size(); j++) {
+			if (temp.size() > 5) break;
+			output += " ";
+		}
+		output += temp + " ||";
+
+		// kolejne pozycje kolejnych linijek
+		for (int j = 0; j < v[0].size(); j++) {
+			temp = to_string(v[i][j]);
+
+			output += " ";
+			for (int k = 0; k < 5 - temp.size(); k++) {
+				if (temp.size() > 5) break;
+				output += " ";
+			}
+			output += temp + " |";
+		}
+
+		output += "\n";
+	}
+
+	return output;
+}
+
+std::string Graph::printList(vector<forward_list<Graph::EdgeListElement>> v) {
+	string output = "";
+	string temp = "";
+
+	if (v.size() == 0) {
+		output = "Graf pusty!";
+		return output;
+	}
+
+	output += "   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
+
+	// druga linijka rozdzielajaca
+	for (int i = 0; i < 80; i++) {
+		output += "-";
+	}
+	output += "\n";
+
+	for (int i = 0; i < v.size(); i++) {
+		// pierwsza pozycja kolejnej linijki
+		temp = to_string(i);
+
+		output += " ";
+		for (int j = 0; j < 5 - temp.size(); j++) {
+			if (temp.size() > 5) break;
+			output += " ";
+		}
+		output += temp + " ||";
+
+		// kolejne pozycje
+		for (auto& element : v[i]) {
+			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
+		}
+
+		output += "\n";
+	}
+
+	return output;
 }

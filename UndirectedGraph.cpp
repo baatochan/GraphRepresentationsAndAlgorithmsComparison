@@ -3,7 +3,10 @@
 //
 
 #include <random>
+#include <queue>
+#include <algorithm>
 #include "UndirectedGraph.h"
+#include "MinHeapElement.h"
 
 using namespace std;
 
@@ -74,18 +77,22 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 	}
 }
 
-void UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+string UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+	string output;
+
 	if (index == 1) {
 		if (arg1 == 0) {
-			primsAlgorithmOnMatrix();
+			output = primsAlgorithmOnMatrix();
 		} else if (arg1 == 1) {
-			primsAlgorithmOnList();
+			output = primsAlgorithmOnList();
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
 	} else {
 		throw "Algorytm nie istnieje!";
 	}
+
+	return  output;
 }
 
 void UndirectedGraph::test() {
@@ -144,10 +151,130 @@ void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-void UndirectedGraph::primsAlgorithmOnMatrix() {
-	throw "Algorytm jeszcze nie zaimplementowany!";
+string UndirectedGraph::primsAlgorithmOnMatrix() {
+	// prepare vector for output
+	vector<vector<int>> minimumSpanningTree;
+
+	if (incidenceMatrix.size() == 0)
+		throw "Graf pusty!";
+
+	int numberOfVertices = incidenceMatrix[0].size();
+	vector<int> foundVertices;
+	priority_queue<MinHeapElement, vector<MinHeapElement>, MinHeapElementComparator> queue;
+
+	// take first vertex
+	int vertexID = 0;
+	int edgeEnd;
+	int edgeValue;
+	int i;
+	int j = 0;
+
+	foundVertices.push_back(vertexID);
+
+	do {
+		// look for edges from first vertices
+		for (auto &row : incidenceMatrix) {
+			if (row[vertexID] > 0) {
+				edgeValue = row[vertexID];
+				i = 0;
+				edgeEnd = -1;
+				for (auto &v : row) {
+					if (i == vertexID) {
+						i++;
+						continue;
+					}
+					if (v > 0) {
+						edgeEnd = i;
+					}
+					i++;
+				}
+
+				if (edgeEnd == -1)
+					throw "Nieznany blad!"; // should never be thrown
+
+				queue.push(MinHeapElement(vertexID, edgeEnd, edgeValue));
+			}
+		}
+
+		do {
+			if (queue.empty()) // jesli kolejka pusta, wywal sie
+				throw "Graf niespojny!";
+			MinHeapElement element = queue.top();
+			vertexID = element.getEdgeBeginning();
+			edgeEnd = element.getEdgeEnd();
+			edgeValue = element.getEdgeValue();
+			queue.pop();
+		} while (find(foundVertices.begin(), foundVertices.end(), edgeEnd) != foundVertices.end());
+
+		foundVertices.push_back(edgeEnd);
+
+		minimumSpanningTree.emplace_back();
+		minimumSpanningTree[j].resize(numberOfVertices);
+
+		minimumSpanningTree[j][vertexID] = edgeValue;
+		minimumSpanningTree[j][edgeEnd] = edgeValue;
+
+		vertexID = edgeEnd;
+		j++;
+
+	} while (foundVertices.size() < numberOfVertices);
+
+	string output = "Minimalne drzewo rozpinajace\n";
+
+	output += printMatrix(minimumSpanningTree);
+
+	return output;
 }
 
-void UndirectedGraph::primsAlgorithmOnList() {
-	throw "Algorytm jeszcze nie zaimplementowany!";
+string UndirectedGraph::primsAlgorithmOnList() {
+	// prepare vector for output
+	std::vector<std::forward_list<EdgeListElement>> minimumSpanningTree;
+
+	if (adjacencyList.size() == 0)
+		throw "Graf pusty!";
+
+	int numberOfVertices = adjacencyList.size();
+	minimumSpanningTree.resize(numberOfVertices);
+	vector<int> foundVertices;
+	priority_queue<MinHeapElement, vector<MinHeapElement>, MinHeapElementComparator> queue;
+
+	// take first vertex
+	int vertexID = 0;
+	int edgeEnd;
+	int edgeValue;
+	int i;
+	int j = 0;
+
+	foundVertices.push_back(vertexID);
+
+	do {
+		// look for edges from first vertices
+		for (auto& element : adjacencyList[vertexID]) {
+			queue.push(MinHeapElement(vertexID, element.edgeEnd, element.value));
+		}
+
+		do {
+			if (queue.empty()) // jesli kolejka pusta, wywal sie
+				throw "Graf niespojny!";
+			MinHeapElement element = queue.top();
+			vertexID = element.getEdgeBeginning();
+			edgeEnd = element.getEdgeEnd();
+			edgeValue = element.getEdgeValue();
+			queue.pop();
+		} while (find(foundVertices.begin(), foundVertices.end(), edgeEnd) != foundVertices.end());
+
+		foundVertices.push_back(edgeEnd);
+
+		minimumSpanningTree[vertexID].push_front({edgeEnd, edgeValue});
+
+		vertexID = edgeEnd;
+		j++;
+
+	} while (foundVertices.size() < numberOfVertices);
+
+	string output = "Minimalne drzewo rozpinajace\n";
+
+	output += printList(minimumSpanningTree);
+
+	return output;
 }
