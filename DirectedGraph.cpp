@@ -47,6 +47,11 @@ void DirectedGraph::loadRawDataToMatrix(std::vector<int> rawData) {
 		int edgeEnd = rawData[i++];
 		int edgeValue = rawData[i++];
 
+		if (edgeBeginning == edgeEnd) {
+			incidenceMatrix.clear();
+			throw "Petle sa nieakceptowane!";
+		}
+
 		incidenceMatrix[j][edgeEnd] = edgeValue * -1;
 		incidenceMatrix[j][edgeBeginning] = edgeValue;
 	}
@@ -64,6 +69,11 @@ void DirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 		int edgeBeginning = rawData[i++];
 		int edgeEnd = rawData[i++];
 		int edgeValue = rawData[i++];
+
+		if (edgeBeginning == edgeEnd) {
+			incidenceMatrix.clear();
+			throw "Petle sa nieakceptowane!";
+		}
 
 		adjacencyList[edgeBeginning].push_front({edgeEnd, edgeValue});
 	}

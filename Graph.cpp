@@ -137,7 +137,7 @@ vector<int> Graph::loadRawDataFrom(string path) {
 	fstream file(path, ios::in);
 
 	if (!file.is_open())
-		return returnIntVector; // should throw an error
+		throw "Plik nie istnieje, badz zablokowany dostep!";
 
 	string temp = "";
 	while (file >> temp) {
