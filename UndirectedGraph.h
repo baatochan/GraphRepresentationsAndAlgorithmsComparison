@@ -25,8 +25,8 @@ protected:
 	void loadRawDataToList(std::vector<int> rawData) override ;
 
 private:
-	std::string primsAlgorithmOnMatrix();
-	std::string primsAlgorithmOnList();
+	std::string primsAlgorithmOnMatrix(bool print);
+	std::string primsAlgorithmOnList(bool print);
 
 };
 

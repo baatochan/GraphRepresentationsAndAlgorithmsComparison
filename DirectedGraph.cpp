@@ -80,9 +80,9 @@ string DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
 
 	if (index == 1) {
 		if (arg1 == 0) {
-			output = dijkstrasAlgorithmOnMatrix(arg2, arg3);
+			output = dijkstrasAlgorithmOnMatrix(arg2, arg3, true);
 		} else if (arg1 == 1) {
-			output = dijkstrasAlgorithmOnList(arg2, arg3);
+			output = dijkstrasAlgorithmOnList(arg2, arg3, true);
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
@@ -148,7 +148,7 @@ void DirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVertex) {
+std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVertex, bool print) {
 	if (incidenceMatrix.size() == 0)
 		throw "Graf pusty!";
 
@@ -210,23 +210,28 @@ std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVe
 
 	}
 
-	string output;
-	output = "Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) + " wynosi: " + to_string(pathLength[endVertex]) + ".\n";
-	output += "Prowadzi nastepujaca droga: ";
+	if (print) {
+		string output;
+		output = "Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) +
+		         " wynosi: " + to_string(pathLength[endVertex]) + ".\n";
+		output += "Prowadzi nastepujaca droga: ";
 
-	currentVertex = endVertex;
+		currentVertex = endVertex;
 
-	output += to_string(currentVertex);
+		output += to_string(currentVertex);
 
-	while (currentVertex != beginVertex) {
-		currentVertex = previousVertex[currentVertex];
-		output +=  " <- " + to_string(currentVertex);
+		while (currentVertex != beginVertex) {
+			currentVertex = previousVertex[currentVertex];
+			output += " <- " + to_string(currentVertex);
+		}
+
+		return output;
 	}
 
-	return output;
+	return "";
 }
 
-std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVertex) {
+std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVertex, bool print) {
 	if (adjacencyList.size() == 0)
 		throw "Graf pusty!";
 
@@ -282,18 +287,23 @@ std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVert
 
 	}
 
-	string output;
-	output = "Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) + " wynosi: " + to_string(pathLength[endVertex]) + ".\n";
-	output += "Prowadzi nastepujaca droga: ";
+	if (print) {
+		string output;
+		output = "Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) +
+		         " wynosi: " + to_string(pathLength[endVertex]) + ".\n";
+		output += "Prowadzi nastepujaca droga: ";
 
-	currentVertex = endVertex;
+		currentVertex = endVertex;
 
-	output += to_string(currentVertex);
+		output += to_string(currentVertex);
 
-	while (currentVertex != beginVertex) {
-		currentVertex = previousVertex[currentVertex];
-		output +=  " <- " + to_string(currentVertex);
+		while (currentVertex != beginVertex) {
+			currentVertex = previousVertex[currentVertex];
+			output += " <- " + to_string(currentVertex);
+		}
+
+		return output;
 	}
 
-	return output;
+	return "";
 }

@@ -82,9 +82,9 @@ string UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) 
 
 	if (index == 1) {
 		if (arg1 == 0) {
-			output = primsAlgorithmOnMatrix();
+			output = primsAlgorithmOnMatrix(true);
 		} else if (arg1 == 1) {
-			output = primsAlgorithmOnList();
+			output = primsAlgorithmOnList(true);
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
@@ -151,7 +151,7 @@ void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-string UndirectedGraph::primsAlgorithmOnMatrix() {
+std::string UndirectedGraph::primsAlgorithmOnMatrix(bool print) {
 	// prepare vector for output
 	vector<vector<int>> minimumSpanningTree;
 
@@ -219,14 +219,18 @@ string UndirectedGraph::primsAlgorithmOnMatrix() {
 
 	} while (foundVertices.size() < numberOfVertices);
 
-	string output = "Minimalne drzewo rozpinajace\n";
+	if (print) {
+		string output = "Minimalne drzewo rozpinajace\n";
 
-	output += printMatrix(minimumSpanningTree);
+		output += printMatrix(minimumSpanningTree);
 
-	return output;
+		return output;
+	}
+
+	return "";
 }
 
-string UndirectedGraph::primsAlgorithmOnList() {
+std::string UndirectedGraph::primsAlgorithmOnList(bool print) {
 	// prepare vector for output
 	std::vector<std::forward_list<EdgeListElement>> minimumSpanningTree;
 
@@ -273,9 +277,13 @@ string UndirectedGraph::primsAlgorithmOnList() {
 
 	} while (foundVertices.size() < numberOfVertices);
 
-	string output = "Minimalne drzewo rozpinajace\n";
+	if (print) {
+		string output = "Minimalne drzewo rozpinajace\n";
 
-	output += printList(minimumSpanningTree);
+		output += printList(minimumSpanningTree);
 
-	return output;
+		return output;
+	}
+
+	return "";
 }
