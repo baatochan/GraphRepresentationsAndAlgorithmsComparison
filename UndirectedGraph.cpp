@@ -147,7 +147,7 @@ void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 
 // private
 
-void UndirectedGraph::primsAlgorithmOnMatrix() {
+string UndirectedGraph::primsAlgorithmOnMatrix() {
 	// prepare vector for output
 	vector<vector<int>> minimumSpanningTree;
 	int numberOfVertices = incidenceMatrix[0].size();
@@ -211,6 +211,11 @@ void UndirectedGraph::primsAlgorithmOnMatrix() {
 	if (foundVertices.size() < numberOfVertices)
 		throw "Graf niespojny!";
 
+	string output = "Minimalne drzewo rozpinajace\n";
+
+	output += printMatrix(minimumSpanningTree);
+
+	return output;
 }
 
 void UndirectedGraph::primsAlgorithmOnList() {
