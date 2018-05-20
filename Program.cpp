@@ -22,6 +22,7 @@ void Program::start() {
 	string list;
 	char index;
 	string result;
+	int range;
 
 	do {
 		printGraphTypeSelect();
@@ -82,8 +83,14 @@ void Program::start() {
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						cerr << "Bledna wartosc! Podaj gestosc grafu: ";
 					}
+					cout << "Wagi krawedzi beda generowane z zakresu [1, max_value]. Podaj maksymalna wartosc: ";
+					while (!(cin >> range)) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						cerr << "Bledna wartosc! Podaj maksymalna wartosc: : ";
+					}
 
-					graph->generate(numberOfVerticles, density);
+					graph->generate(numberOfVerticles, density, range);
 					break;
 
 				case '3': // wyswietl macierz

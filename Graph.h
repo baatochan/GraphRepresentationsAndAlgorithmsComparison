@@ -43,7 +43,7 @@ public:
 
 	void loadDataFrom(std::string fileName);
 
-	virtual void generate(int numberOfVertices, int density)= 0;
+	virtual void generate(int numberOfVertices, int density, int range)= 0;
 
 	virtual std::string runAlgorithm(char index, char arg1, int arg2, int arg3)= 0;
 
