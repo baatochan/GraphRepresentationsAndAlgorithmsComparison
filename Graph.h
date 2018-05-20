@@ -45,7 +45,7 @@ public:
 
 	virtual void generate(int numberOfVertices, int density)= 0;
 
-	virtual void runAlgorithm(int index, int arg1, int arg2)= 0;
+	virtual void runAlgorithm(char index, char arg1, int arg2, int arg3)= 0;
 
 	virtual void test()= 0;
 

@@ -14,7 +14,7 @@ UndirectedGraph::UndirectedGraph() : Graph("Graf nieskierowany", 1) {}
 std::string UndirectedGraph::getAvailableAlgorithms() {
 	std::string output = "";
 
-	output += "6. Algorytm Prima (MST) [arg1 <- 0; arg2 <- 0]\n";
+	output += "6. Algorytm Prima (MST) [arg1 <- rodzaj reprezentacji (m - macierz, l - lista); arg2 <- 0; arg3 <- 0]\n";
 
 	return output;
 }
@@ -74,7 +74,7 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 	}
 }
 
-void UndirectedGraph::runAlgorithm(int index, int arg1, int arg2) {
+void UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
 
 }
 
