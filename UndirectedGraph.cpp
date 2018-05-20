@@ -77,18 +77,22 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 	}
 }
 
-void UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+string UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+	string output;
+
 	if (index == 1) {
 		if (arg1 == 0) {
-			primsAlgorithmOnMatrix();
+			output = primsAlgorithmOnMatrix();
 		} else if (arg1 == 1) {
-			primsAlgorithmOnList();
+			output = primsAlgorithmOnList();
 		} else {
 			throw "Nieznany blad!"; // should never be thrown
 		}
 	} else {
 		throw "Algorytm nie istnieje!";
 	}
+
+	return  output;
 }
 
 void UndirectedGraph::test() {
@@ -218,6 +222,6 @@ string UndirectedGraph::primsAlgorithmOnMatrix() {
 	return output;
 }
 
-void UndirectedGraph::primsAlgorithmOnList() {
+string UndirectedGraph::primsAlgorithmOnList() {
 	throw "Algorytm jeszcze nie zaimplementowany!";
 }

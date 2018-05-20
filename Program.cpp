@@ -21,6 +21,7 @@ void Program::start() {
 	string matrix;
 	string list;
 	char index;
+	string result;
 
 	do {
 		printGraphTypeSelect();
@@ -111,7 +112,8 @@ void Program::start() {
 				case '9':
 					index = option2 - 53;
 					try {
-						runAlgorithm(index);
+						result = runAlgorithm(index);
+						cout << result << endl;
 					} catch (const char* e) {
 						cerr << e << endl;
 					}
@@ -163,11 +165,13 @@ void Program::printGraphMenu() {
 	cout << "Podaj opcje: ";
 }
 
-void Program::runAlgorithm(char index) {
+string Program::runAlgorithm(char index) {
 	string arg1s;
 	char arg1;
 	int arg2;
 	int arg3;
+
+	string output;
 
 	if (graph->getNumberOfAvailableAlgorithms() > index - 1) {
 		cout << "Podaj argument 1: ";
@@ -198,8 +202,10 @@ void Program::runAlgorithm(char index) {
 			cerr << "Bledna wartosc! Podaj argument 3: ";
 		}
 
-		graph->runAlgorithm(index, arg1, arg2, arg3);
+		output = graph->runAlgorithm(index, arg1, arg2, arg3);
 	} else {
 		cerr << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
 	}
+
+	return output;
 }

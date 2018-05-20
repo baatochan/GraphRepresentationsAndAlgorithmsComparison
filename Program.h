@@ -21,7 +21,7 @@ private:
 
 	void printGraphMenu();
 
-	void runAlgorithm(char index);
+	std::string runAlgorithm(char index);
 };
 
 

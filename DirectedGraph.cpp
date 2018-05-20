@@ -74,7 +74,7 @@ void DirectedGraph::generate(int numberOfVertices, int density) {
 
 }
 
-void DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
+string DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
 	if (index == 1) {
 		if (arg1 == 0) {
 			dijkstrasAlgorithmOnMatrix();
