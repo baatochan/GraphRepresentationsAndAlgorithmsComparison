@@ -33,39 +33,9 @@ string Graph::printIncidenceMatrix() {
 
 string Graph::printAdjacencyList() {
 	string output = getName();
-	string temp = "";
-
-	if (adjacencyList.size() == 0) {
-		output = "Graf pusty!";
-		return output;
-	}
-
-	output += "\n   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
-
-	// druga linijka rozdzielajaca
-	for (int i = 0; i < 80; i++) {
-		output += "-";
-	}
 	output += "\n";
 
-	for (int i = 0; i < adjacencyList.size(); i++) {
-		// pierwsza pozycja kolejnej linijki
-		temp = to_string(i);
-
-		output += " ";
-		for (int j = 0; j < 5 - temp.size(); j++) {
-			if (temp.size() > 5) break;
-			output += " ";
-		}
-		output += temp + " ||";
-
-		// kolejne pozycje
-		for (auto& element : adjacencyList[i]) {
-			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
-		}
-
-		output += "\n";
-	}
+	output += printList(adjacencyList);
 
 	return output;
 }
@@ -175,6 +145,45 @@ std::string Graph::printMatrix(vector<vector<int>> v) {
 				output += " ";
 			}
 			output += temp + " |";
+		}
+
+		output += "\n";
+	}
+
+	return output;
+}
+
+std::string Graph::printList(vector<forward_list<Graph::EdgeListElement>> v) {
+	string output = "";
+	string temp = "";
+
+	if (v.size() == 0) {
+		output = "Graf pusty!";
+		return output;
+	}
+
+	output += "   W   || wierzcholek konca krawedzi, waga | kolejna... | ...\n"; // pierwsza linijka
+
+	// druga linijka rozdzielajaca
+	for (int i = 0; i < 80; i++) {
+		output += "-";
+	}
+	output += "\n";
+
+	for (int i = 0; i < v.size(); i++) {
+		// pierwsza pozycja kolejnej linijki
+		temp = to_string(i);
+
+		output += " ";
+		for (int j = 0; j < 5 - temp.size(); j++) {
+			if (temp.size() > 5) break;
+			output += " ";
+		}
+		output += temp + " ||";
+
+		// kolejne pozycje
+		for (auto& element : v[i]) {
+			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
 		}
 
 		output += "\n";
