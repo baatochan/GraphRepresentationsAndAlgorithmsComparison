@@ -177,11 +177,11 @@ std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVe
 		unsigned long currentLength = pathLength[currentVertex];
 
 		for (auto& row : incidenceMatrix) {
-			if (row[beginVertex] > 0) {
+			if (row[currentVertex] > 0) {
 				for (int j = 0; j < numberOfVertices; j++) {
 					if (row[j] < 0) {
-						if (pathLength[j] > currentLength + row[beginVertex]) {
-							pathLength[j] = currentLength + row[beginVertex];
+						if (pathLength[j] > currentLength + row[currentVertex]) {
+							pathLength[j] = currentLength + row[currentVertex];
 							previousVertex[j] = currentVertex;
 						}
 					}
