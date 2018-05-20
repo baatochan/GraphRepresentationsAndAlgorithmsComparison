@@ -43,7 +43,7 @@ void Program::start() {
 				break;
 
 			default:
-				cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
+				cerr << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
 				breakMainMenu = true;
 				break;
 		}
@@ -64,7 +64,7 @@ void Program::start() {
 					try {
 						graph->loadDataFrom(file);
 					} catch (const char* e) {
-						cout<<e<<endl;
+						cerr << e << endl;
 					}
 					break;
 
@@ -73,13 +73,13 @@ void Program::start() {
 					while (!(cin >> numberOfVerticles)) {
 						cin.clear();
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						cout << "Bledna wartosc! Podaj ilosc wierzcholkow: ";
+						cerr << "Bledna wartosc! Podaj ilosc wierzcholkow: ";
 					}
 					cout << "Podaj gestosc grafu: ";
 					while (!(cin >> density)) {
 						cin.clear();
 						cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						cout << "Bledna wartosc! Podaj gestosc grafu: ";
+						cerr << "Bledna wartosc! Podaj gestosc grafu: ";
 					}
 
 					graph->generate(numberOfVerticles, density);
@@ -116,7 +116,7 @@ void Program::start() {
 					break;
 
 				default:
-					cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
+					cerr << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
 					break;
 			}
 
@@ -163,20 +163,20 @@ void Program::runAlgorithm(char index) {
 	int arg1;
 	int arg2;
 	if (graph->getNumberOfAvailableAlgorithms() > index - 1) {
-		cout<<"Podaj argument 1: ";
+		cout << "Podaj argument 1: ";
 		while (!(cin >> arg1)) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "Bledna wartosc! Podaj argument 1: ";
+			cerr << "Bledna wartosc! Podaj argument 1: ";
 		}
-		cout<<"Podaj argument 2: ";
+		cout << "Podaj argument 2: ";
 		while (!(cin >> arg2)) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "Bledna wartosc! Podaj argument 2: ";
+			cerr << "Bledna wartosc! Podaj argument 2: ";
 		}
 		graph->runAlgorithm(index, arg1, arg2);
 	} else {
-		cout << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
+		cerr << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
 	}
 }
