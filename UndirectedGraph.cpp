@@ -274,7 +274,7 @@ string UndirectedGraph::primsAlgorithmOnList() {
 
 	string output = "Minimalne drzewo rozpinajace\n";
 
-	output += printMatrix(minimumSpanningTree);
+	output += printList(minimumSpanningTree);
 
 	return output;
 }
