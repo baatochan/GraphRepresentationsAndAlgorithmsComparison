@@ -168,11 +168,11 @@ void Program::runAlgorithm(char index) {
 	char arg1;
 	int arg2;
 	int arg3;
-	
+
 	if (graph->getNumberOfAvailableAlgorithms() > index - 1) {
 		cout << "Podaj argument 1: ";
 		cin >> arg1s;
-		while (arg1s != "l" || arg1s != "L" || arg1s != "m" || arg1s != "M") {
+		while (arg1s != "m" && arg1s != "M" && arg1s != "l" && arg1s != "L") {
 			cerr << "Bledna wartosc! Podaj argument 1: ";
 			cin >> arg1s;
 		}
@@ -198,7 +198,7 @@ void Program::runAlgorithm(char index) {
 			cerr << "Bledna wartosc! Podaj argument 3: ";
 		}
 
-		graph->runAlgorithm(index, arg1, arg2, 0);
+		graph->runAlgorithm(index, arg1, arg2, arg3);
 	} else {
 		cerr << "Nie ma takiej opcji, wybierz jeszcze raz." << endl;
 	}
