@@ -75,14 +75,24 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 }
 
 void UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
-
+	if (index == 1) {
+		if (arg1 == 0) {
+			primsAlgorithmOnMatrix();
+		} else if (arg1 == 1) {
+			primsAlgorithmOnList();
+		} else {
+			throw "Nieznany blad!"; // should never be thrown
+		}
+	} else {
+		throw "Algorytm nie istnieje!";
+	}
 }
 
 void UndirectedGraph::test() {
 
 }
 
-// private
+// protected
 
 void UndirectedGraph::loadRawDataToMatrix(vector<int> rawData) {
 	incidenceMatrix.clear();
@@ -130,4 +140,14 @@ void UndirectedGraph::loadRawDataToList(std::vector<int> rawData) {
 		adjacencyList[edgeBeginning].push_front({edgeEnd, edgeValue});
 		adjacencyList[edgeEnd].push_front({edgeBeginning, edgeValue});
 	}
+}
+
+// private
+
+void UndirectedGraph::primsAlgorithmOnMatrix() {
+	throw "Algorytm jeszcze nie zaimplementowany!";
+}
+
+void UndirectedGraph::primsAlgorithmOnList() {
+	throw "Algorytm jeszcze nie zaimplementowany!";
 }
