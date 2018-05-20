@@ -22,7 +22,7 @@ std::string UndirectedGraph::getAvailableAlgorithms() {
 	return output;
 }
 
-void UndirectedGraph::generate(int numberOfVertices, int density) {
+void UndirectedGraph::generate(int numberOfVertices, int density, int range) {
 	double dens = (double)density / 100;
 	dens *= numberOfVertices * (numberOfVertices - 1);
 	dens /= 2;
@@ -45,7 +45,7 @@ void UndirectedGraph::generate(int numberOfVertices, int density) {
 	std::uniform_int_distribution<int> randomVertex(0, numberOfVertices - 1);
 	// std::uniform_int_distribution<int> randomEdge(0, numberOfEdges - 1);
 	// std::uniform_int_distribution<int> randomValue(1, 15);
-	std::uniform_int_distribution<int> randomValue(1, INT32_MAX);
+	std::uniform_int_distribution<int> randomValue(1, range);
 
 	int beginningVertex = 0;
 	int endVertex = 0;
@@ -266,6 +266,7 @@ string UndirectedGraph::primsAlgorithmOnList() {
 		foundVertices.push_back(edgeEnd);
 
 		minimumSpanningTree[vertexID].push_front({edgeEnd, edgeValue});
+		minimumSpanningTree[edgeEnd].push_front({vertexID, edgeValue});
 
 		vertexID = edgeEnd;
 		j++;

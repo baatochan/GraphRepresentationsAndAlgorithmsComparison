@@ -14,7 +14,7 @@ public:
 
 	std::string getAvailableAlgorithms() override;
 
-	void generate(int numberOfVertices, int density) override;
+	void generate(int numberOfVertices, int density, int range) override;
 
 	std::string runAlgorithm(char index, char arg1, int arg2, int arg3) override;
 
