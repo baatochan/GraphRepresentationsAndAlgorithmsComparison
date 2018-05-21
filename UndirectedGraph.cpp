@@ -110,6 +110,8 @@ void UndirectedGraph::test() {
 	Counter counter;
 	double result = 0;
 
+	cout.setf(ios::fixed);
+
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 4; j++) {
 			for (int k = 0; k < 2; k++) {

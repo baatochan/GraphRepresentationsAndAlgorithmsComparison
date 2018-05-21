@@ -109,6 +109,8 @@ void DirectedGraph::test() {
 	double result = 0;
 	int beginVertex;
 	int endVertex;
+	
+	cout.setf(ios::fixed);
 
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -140,6 +142,8 @@ void DirectedGraph::test() {
 					std::uniform_int_distribution<int> randomVertex(0, numberOfElements[i] - 1);
 					beginVertex = randomVertex(mt);
 					endVertex = randomVertex(mt);
+
+					cout << "PW: " << beginVertex << ", KW: " << endVertex << " - ";
 
 					if (representationType[k] == 'M') {
 						try {
