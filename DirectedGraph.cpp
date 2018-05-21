@@ -5,7 +5,11 @@
 #include <cmath>
 #include <random>
 #include <climits>
+#include <iostream>
+#include <fstream>
+#include <ctime>
 #include "DirectedGraph.h"
+#include "Counter.h"
 
 using namespace std;
 
@@ -94,7 +98,88 @@ string DirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) {
 }
 
 void DirectedGraph::test() {
+	int numberOfElements[5] = {50, 100, 150, 200, 250};
+	int density[4] = {25, 50, 75, 99};
+	char representationType[2] = {'M', 'L'};
+	int range = 1000;
+	int numberOfTests = 100;
+	string path;
+	double sumOfResults;
+	Counter counter;
+	double result = 0;
+	int beginVertex;
+	int endVertex;
+	
+	cout.setf(ios::fixed);
 
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 4; j++) {
+			for (int k = 0; k < 2; k++) {
+				path = "..\\wyniki\\";
+				path += to_string(time(0));
+				path += "-gSkierowany-algorytmDijkstry-n" + to_string(numberOfElements[i]) + "-g" +
+				        to_string(density[j]) + "-r" + representationType[k] + ".txt";
+
+				cout << "Test - Graf: Skierowany - Algorytm: Dijkstry - Ilosc elem: " << numberOfElements[i] << " - Gestosc: " << density[j] << " - Reprezentacja: " << representationType[k] << endl;
+
+				fstream file(path, fstream::out);
+
+				file.setf(ios::fixed);
+
+				sumOfResults = 0;
+
+				if (!file.is_open()) {
+					cerr << "Wyniki sie nie zapisza!!!" << endl;
+				}
+
+				for (int l = 0; l < numberOfTests; l++) {
+					generate(numberOfElements[i], density[j], range);
+
+					cout << "Test: " << l << " - ";
+
+					std::random_device rd;
+					std::mt19937 mt(rd());
+					std::uniform_int_distribution<int> randomVertex(0, numberOfElements[i] - 1);
+					beginVertex = randomVertex(mt);
+					endVertex = randomVertex(mt);
+
+					cout << "PW: " << beginVertex << ", KW: " << endVertex << " - ";
+
+					if (representationType[k] == 'M') {
+						try {
+							counter.startCounter();
+							dijkstrasAlgorithmOnMatrix(beginVertex, endVertex, false);
+							result = counter.getCounter();
+						} catch (const char* e) {
+							l--;
+							result = 0;
+						}
+					} else {
+						try {
+							counter.startCounter();
+							dijkstrasAlgorithmOnList(beginVertex, endVertex, false);
+							result = counter.getCounter();
+						} catch (const char* e) {
+							l--;
+							result = 0;
+						}
+					}
+
+					cout << "Czas: " << result << endl;
+					file << result << endl;
+
+					sumOfResults += result;
+				}
+
+				sumOfResults /= numberOfTests;
+
+				cout << "Srednia: " << sumOfResults << endl;
+				file << "Srednia" << endl << sumOfResults << endl;
+
+				file.close();
+			}
+		}
+	}
 }
 
 // protected
