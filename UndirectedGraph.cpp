@@ -5,8 +5,12 @@
 #include <random>
 #include <queue>
 #include <algorithm>
+#include <iostream>
+#include <fstream>
+#include <ctime>
 #include "UndirectedGraph.h"
 #include "MinHeapElement.h"
+#include "Counter.h"
 
 using namespace std;
 
@@ -96,7 +100,76 @@ string UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) 
 }
 
 void UndirectedGraph::test() {
+	int numberOfElements[5] = {50, 100, 150, 200, 250};
+	int density[4] = {25, 50, 75, 99};
+	char representationType[2] = {'M', 'L'};
+	int range = 1000;
+	int numberOfTests = 100;
+	string path;
+	double sumOfResults;
+	Counter counter;
+	double result = 0;
 
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 4; j++) {
+			for (int k = 0; k < 2; k++) {
+				path = "..\\wyniki\\";
+				path += to_string(time(0));
+				path += "-gNieskierowany-algorytmPrima-n" + to_string(numberOfElements[i]) + "-g" +
+				        to_string(density[j]) + "-r" + representationType[k] + ".txt";
+
+				cout << "Test - Graf: Nieskierowany - Algorytm: Prima - Ilosc elem: " << numberOfElements[i] << " - Gestosc: " << density[j] << " - Reprezentacja: " << representationType[k] << endl;
+
+				fstream file(path, fstream::out);
+
+				file.setf(ios::fixed);
+
+				sumOfResults = 0;
+
+				if (!file.is_open()) {
+					cerr << "Wyniki sie nie zapisza!!!" << endl;
+				}
+
+				for (int l = 0; l < numberOfTests; l++) {
+					generate(numberOfElements[i], density[j], range);
+
+					cout << "Test: " << l << " - ";
+
+					if (representationType[k] == 'M') {
+						try {
+							counter.startCounter();
+							primsAlgorithmOnMatrix(false);
+							result = counter.getCounter();
+						} catch (const char* e) {
+							l--;
+							result = 0;
+						}
+					} else {
+						try {
+							counter.startCounter();
+							primsAlgorithmOnList(false);
+							result = counter.getCounter();
+						} catch (const char* e) {
+							l--;
+							result = 0;
+						}
+					}
+
+					cout << "Czas: " << result << endl;
+					file << result << endl;
+
+					sumOfResults += result;
+				}
+
+				sumOfResults /= numberOfTests;
+
+				cout << "Srednia: " << sumOfResults << endl;
+				file << "Srednia" << endl << sumOfResults << endl;
+
+				file.close();
+			}
+		}
+	}
 }
 
 // protected
