@@ -300,7 +300,7 @@ std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVe
 		shortestPath = pathLength[endVertex];
 
 		if (shortestPath == ULONG_MAX) {
-			output += "Droga pomiedzy wybranymi wierzcholkami nie istnieje!\n\n"
+			output += "Droga pomiedzy wybranymi wierzcholkami nie istnieje!\n\n";
 		} else {
 			output =
 					"Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) +
@@ -321,7 +321,7 @@ std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVe
 
 		output += "Najkrotsza droga do innych wierzcholkow: \n";
 		output += "W | Dlugosc\n";
-		output += "------------------";
+		output += "------------------\n";
 		for (int i = 0; i < numberOfVertices; i++) {
 			shortestPath = pathLength[i];
 
@@ -403,7 +403,7 @@ std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVert
 		shortestPath = pathLength[endVertex];
 
 		if (shortestPath == ULONG_MAX) {
-			output += "Droga pomiedzy wybranymi wierzcholkami nie istnieje!\n\n"
+			output += "Droga pomiedzy wybranymi wierzcholkami nie istnieje!\n\n";
 		} else {
 			output =
 					"Najkrotsza droga z wierzch.: " + to_string(beginVertex) + " do wierzch.: " + to_string(endVertex) +
@@ -424,7 +424,7 @@ std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVert
 
 		output += "Najkrotsza droga do innych wierzcholkow: \n";
 		output += "W | Dlugosc\n";
-		output += "------------------";
+		output += "------------------\n";
 		for (int i = 0; i < numberOfVertices; i++) {
 			shortestPath = pathLength[i];
 
