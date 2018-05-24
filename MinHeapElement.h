@@ -17,14 +17,16 @@ private:
 
 public:
 	int getEdgeBeginning() const;
+
 	int getEdgeEnd() const;
+
 	int getEdgeValue() const;
 
 };
 
 class MinHeapElementComparator {
 public:
-	int operator() (const MinHeapElement& element1, const MinHeapElement& element2);
+	int operator()(const MinHeapElement &element1, const MinHeapElement &element2);
 
 };
 

@@ -21,11 +21,13 @@ public:
 	void test() override;
 
 protected:
-	void loadRawDataToMatrix(std::vector<int> rawData) override ;
-	void loadRawDataToList(std::vector<int> rawData) override ;
+	void loadRawDataToMatrix(std::vector<int> rawData) override;
+
+	void loadRawDataToList(std::vector<int> rawData) override;
 
 private:
 	std::string primsAlgorithmOnMatrix(bool print);
+
 	std::string primsAlgorithmOnList(bool print);
 
 };

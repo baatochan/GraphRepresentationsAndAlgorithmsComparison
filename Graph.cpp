@@ -61,7 +61,7 @@ vector<int> Graph::loadRawDataFrom(string path) {
 	while (file >> temp) {
 		try {
 			returnIntVector.push_back(stoi(temp));
-		} catch (const exception& e) {
+		} catch (const exception &e) {
 			returnIntVector.clear();
 			throw "Bledna zawartosc pliku! Upewnij sie ze podales odpowiedni format!";
 		}
@@ -72,7 +72,7 @@ vector<int> Graph::loadRawDataFrom(string path) {
 
 bool Graph::edgeBeginningAvailable(int vertex) {
 	int i = 0;
-	for (auto& v : adjacencyList[vertex]) {
+	for (auto &v : adjacencyList[vertex]) {
 		i++;
 	}
 
@@ -85,7 +85,7 @@ bool Graph::edgeEndAvailable(int beginning, int end) {
 		return false;
 	}
 
-	for (auto& v : adjacencyList[beginning]) {
+	for (auto &v : adjacencyList[beginning]) {
 		if (v.edgeEnd == end)
 			return false;
 	}
@@ -182,7 +182,7 @@ std::string Graph::printList(vector<forward_list<Graph::EdgeListElement>> v) {
 		output += temp + " ||";
 
 		// kolejne pozycje
-		for (auto& element : v[i]) {
+		for (auto &element : v[i]) {
 			output += " " + to_string(element.edgeEnd) + ", " + to_string(element.value) + " |";
 		}
 
