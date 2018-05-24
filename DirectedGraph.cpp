@@ -4,7 +4,6 @@
 
 #include <cmath>
 #include <random>
-#include <climits>
 #include <iostream>
 #include <fstream>
 #include <ctime>
@@ -26,7 +25,7 @@ std::string DirectedGraph::getAvailableAlgorithms() {
 }
 
 void DirectedGraph::generate(int numberOfVertices, int density, int range) {
-	double dens = (double)density / 100;
+	double dens = (double) density / 100;
 	dens *= numberOfVertices * (numberOfVertices - 1);
 	int numberOfEdges = round(dens);
 
@@ -37,7 +36,7 @@ void DirectedGraph::generate(int numberOfVertices, int density, int range) {
 	incidenceMatrix.resize(numberOfEdges);
 	adjacencyList.resize(numberOfVertices);
 
-	for (auto& row : incidenceMatrix) {
+	for (auto &row : incidenceMatrix) {
 		row.assign(numberOfVertices, 0);
 	}
 
@@ -59,13 +58,13 @@ void DirectedGraph::generate(int numberOfVertices, int density, int range) {
 	for (int i = 0; i < numberOfEdges; i++) {
 		// random beggining
 		edgeBeginningNotAvailable = true;
-		while (edgeBeginningNotAvailable){
+		while (edgeBeginningNotAvailable) {
 			beginningVertex = randomVertex(mt);
 			edgeBeginningNotAvailable = !edgeBeginningAvailable(beginningVertex);
 		};
 		// random end
 		edgeEndNotAvailable = true;
-		while (edgeEndNotAvailable){
+		while (edgeEndNotAvailable) {
 			endVertex = randomVertex(mt);
 			edgeEndNotAvailable = !edgeEndAvailable(beginningVertex, endVertex);
 		};
@@ -109,7 +108,7 @@ void DirectedGraph::test() {
 	double result = 0;
 	int beginVertex;
 	int endVertex;
-	
+
 	cout.setf(ios::fixed);
 
 	for (int i = 0; i < 5; i++) {
@@ -118,9 +117,10 @@ void DirectedGraph::test() {
 				path = "..\\wyniki\\";
 				path += to_string(time(0));
 				path += "-gSkierowany-algorytmDijkstry-n" + to_string(numberOfElements[i]) + "-g" +
-						to_string(density[j]) + "-r" + representationType[k] + ".txt";
+				        to_string(density[j]) + "-r" + representationType[k] + ".txt";
 
-				cout << "Test - Graf: Skierowany - Algorytm: Dijkstry - Ilosc elem: " << numberOfElements[i] << " - Gestosc: " << density[j] << " - Reprezentacja: " << representationType[k] << endl;
+				cout << "Test - Graf: Skierowany - Algorytm: Dijkstry - Ilosc elem: " << numberOfElements[i]
+				     << " - Gestosc: " << density[j] << " - Reprezentacja: " << representationType[k] << endl;
 
 				fstream file(path, fstream::out);
 
@@ -189,7 +189,7 @@ void DirectedGraph::loadRawDataToMatrix(std::vector<int> rawData) {
 	int i = 0;
 	incidenceMatrix.resize(rawData[i++]); // clear vector and resize to first item of raw data
 
-	for (auto& row : incidenceMatrix) {
+	for (auto &row : incidenceMatrix) {
 		row.assign(rawData[i], 0);
 	}
 	i++;
@@ -261,7 +261,7 @@ std::string DirectedGraph::dijkstrasAlgorithmOnMatrix(int beginVertex, int endVe
 	for (int i = 0; i < numberOfVertices; i++) {
 		unsigned long currentLength = pathLength[currentVertex];
 
-		for (auto& row : incidenceMatrix) {
+		for (auto &row : incidenceMatrix) {
 			if (row[currentVertex] > 0) {
 				for (int j = 0; j < numberOfVertices; j++) {
 					if (row[j] < 0) {
@@ -370,8 +370,8 @@ std::string DirectedGraph::dijkstrasAlgorithmOnList(int beginVertex, int endVert
 	for (int i = 0; i < numberOfVertices; i++) {
 		unsigned long currentLength = pathLength[currentVertex];
 
-		for (auto& edge : adjacencyList[currentVertex]) {
-			if (pathLength[edge.edgeEnd] > currentLength + edge.value){
+		for (auto &edge : adjacencyList[currentVertex]) {
+			if (pathLength[edge.edgeEnd] > currentLength + edge.value) {
 				pathLength[edge.edgeEnd] = currentLength + edge.value;
 				previousVertex[edge.edgeEnd] = currentVertex;
 			}

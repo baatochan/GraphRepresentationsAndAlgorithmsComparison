@@ -4,7 +4,6 @@
 
 #include <random>
 #include <queue>
-#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <ctime>
@@ -27,7 +26,7 @@ std::string UndirectedGraph::getAvailableAlgorithms() {
 }
 
 void UndirectedGraph::generate(int numberOfVertices, int density, int range) {
-	double dens = (double)density / 100;
+	double dens = (double) density / 100;
 	dens *= numberOfVertices * (numberOfVertices - 1);
 	dens /= 2;
 	int numberOfEdges = round(dens);
@@ -39,7 +38,7 @@ void UndirectedGraph::generate(int numberOfVertices, int density, int range) {
 	incidenceMatrix.resize(numberOfEdges);
 	adjacencyList.resize(numberOfVertices);
 
-	for (auto& row : incidenceMatrix) {
+	for (auto &row : incidenceMatrix) {
 		row.assign(numberOfVertices, 0);
 	}
 
@@ -96,7 +95,7 @@ string UndirectedGraph::runAlgorithm(char index, char arg1, int arg2, int arg3) 
 		throw "Algorytm nie istnieje!";
 	}
 
-	return  output;
+	return output;
 }
 
 void UndirectedGraph::test() {
@@ -120,7 +119,8 @@ void UndirectedGraph::test() {
 				path += "-gNieskierowany-algorytmPrima-n" + to_string(numberOfElements[i]) + "-g" +
 				        to_string(density[j]) + "-r" + representationType[k] + ".txt";
 
-				cout << "Test - Graf: Nieskierowany - Algorytm: Prima - Ilosc elem: " << numberOfElements[i] << " - Gestosc: " << density[j] << " - Reprezentacja: " << representationType[k] << endl;
+				cout << "Test - Graf: Nieskierowany - Algorytm: Prima - Ilosc elem: " << numberOfElements[i]
+				     << " - Gestosc: " << density[j] << " - Reprezentacja: " << representationType[k] << endl;
 
 				fstream file(path, fstream::out);
 
@@ -181,7 +181,7 @@ void UndirectedGraph::loadRawDataToMatrix(vector<int> rawData) {
 	int i = 0;
 	incidenceMatrix.resize(rawData[i++]); // clear vector and resize to first item of raw data
 
-	for (auto& row : incidenceMatrix) {
+	for (auto &row : incidenceMatrix) {
 		row.assign(rawData[i], 0);
 	}
 	i++;
@@ -328,7 +328,7 @@ std::string UndirectedGraph::primsAlgorithmOnList(bool print) {
 
 	do {
 		// look for edges from first vertices
-		for (auto& element : adjacencyList[vertexID]) {
+		for (auto &element : adjacencyList[vertexID]) {
 			queue.push(MinHeapElement(vertexID, element.edgeEnd, element.value));
 		}
 

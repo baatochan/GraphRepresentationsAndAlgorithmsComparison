@@ -21,11 +21,13 @@ public:
 	void test() override;
 
 protected:
-	void loadRawDataToMatrix(std::vector<int> rawData) override ;
-	void loadRawDataToList(std::vector<int> rawData) override ;
+	void loadRawDataToMatrix(std::vector<int> rawData) override;
+
+	void loadRawDataToList(std::vector<int> rawData) override;
 
 private:
 	std::string dijkstrasAlgorithmOnMatrix(int beginVertex, int endVertex, bool print);
+
 	std::string dijkstrasAlgorithmOnList(int beginVertex, int endVertex, bool print);
 
 };
