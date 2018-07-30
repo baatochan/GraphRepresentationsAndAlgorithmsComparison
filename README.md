@@ -1,10 +1,9 @@
 # Graph Representations and Algorithms Comparison
-
 Implementation of two graph representations and few algorithms with comparison of how fast they perform.
 
 Author: Bartosz Rodziewicz
 
-The task done as a second project for Algorithms and computational complexity (Struktury danych i złożoność obliczeniowa, yes this is official English translation).
+The task done as a second project for Algorithms and Computational Complexity (Struktury danych i złożoność obliczeniowa, yes, that is official English translation).
 
 The task was to implement a way to store graphs in the app using these two representations:
 * Incidence Matrix
